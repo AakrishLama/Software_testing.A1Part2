@@ -1,14 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Member{
-    private String memberId;
-    private String name;
-    private String email;
+    private final String memberId;
+    private final String name;
+    private final String email;
+    private final List<String> borrowedBooks;
     
     public Member(String memberId, String name, String email){
         this.memberId = memberId;
         this.name = name;
         this.email = email;
+        this.borrowedBooks = new ArrayList<>();
     }
     
     public String getMemberId(){
@@ -21,6 +26,10 @@ public class Member{
     
     public String getEmail(){
         return email;
+    }
+
+    public List<String> getBorrowedBooks(){
+        return new ArrayList<>(borrowedBooks);
     }
     
 }
