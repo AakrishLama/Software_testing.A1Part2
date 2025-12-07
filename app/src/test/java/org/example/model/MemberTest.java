@@ -92,4 +92,9 @@ public class MemberTest {
         member.payFines(10.0);
         assertEquals(0.0, member.getTotalFines());
     }
+
+    @Test
+    public void testCanBorrowUnderLimitAndNoFines() {
+        assertTrue(member.canBorrowBook());
+    }
 }
