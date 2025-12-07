@@ -25,6 +25,19 @@ public class MemberTest{
 
         // check if the member has no borrowed books
         assertNotNull(member.getBorrowedBooks());
+
         assertTrue(member.getBorrowedBooks().isEmpty());
+    }
+
+    @Test
+    public void testAddBorrowedBook(){
+        Member member = new Member("M001", "John Doe", "john@example.com");
+
+        String isbn = "1234";
+        member.addBorrowedBook(isbn);
+
+        List<String> borrowedBooks = member.getBorrowedBooks();
+        assertEquals(1, borrowedBooks.size());
+        assertEquals(isbn, borrowedBooks.get(0));
     }
 }  
