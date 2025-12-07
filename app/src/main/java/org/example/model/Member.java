@@ -65,4 +65,13 @@ public class Member {
         return this.borrowedBooks.size() < 5 && this.totalFines == 0;
     }
 
+    @Override
+    public String toString() {
+        return "Member ID: " + memberId + "\n" +
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n" +
+                "Books: " + borrowedBooks.size() + "\n" +
+                "Total Fines: " + totalFines;
+    }
+
 }
