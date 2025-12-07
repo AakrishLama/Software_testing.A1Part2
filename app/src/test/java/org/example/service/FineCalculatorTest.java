@@ -55,4 +55,26 @@ public class FineCalculatorTest {
         assertEquals(2.5, fine);
     }
 
+    @Test
+    public void testCalculateFineWithNullDueDate() {
+        FineCalculator calculator = new FineCalculator();
+        LocalDate returnDate = LocalDate.now();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculator.calculateFine(null, returnDate);
+        });
+    }
+
+    @Test
+    public void testCalculateFineWithNullReturnDate() {
+        // Given
+        FineCalculator calculator = new FineCalculator();
+        LocalDate dueDate = LocalDate.now();
+
+        // When & Then
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculator.calculateFine(dueDate, null);
+        });
+    }
+
 }
