@@ -61,4 +61,8 @@ public class Member {
         }
     }
 
+    public boolean canBorrowBook() {
+        return this.borrowedBooks.size() < 5 && this.totalFines == 0;
+    }
+
 }
