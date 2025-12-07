@@ -1,20 +1,26 @@
 package model;
 
 public class Member{
+    private String memberId;
+    private String name;
+    private String email;
+    
     public Member(String memberId, String name, String email){
-        //todo 
+        this.memberId = memberId;
+        this.name = name;
+        this.email = email;
     }
     
     public String getMemberId(){
-        return null;
+        return memberId;
     }
     
     public String getName(){
-        return null;
+        return name;
     }
     
     public String getEmail(){
-        return null;
+        return email;
     }
     
 }
