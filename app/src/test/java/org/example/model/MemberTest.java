@@ -41,4 +41,17 @@ public class MemberTest {
         assertEquals(1, borrowedBooks.size());
         assertEquals(isbn, borrowedBooks.get(0));
     }
+
+    @Test
+    public void testRemoveBorrowedBook() {
+        Member member = new Member("M001", "John Doe", "john@example.com");
+
+        String isbn = "1234";
+        member.addBorrowedBook(isbn);
+
+        member.removeBorrowedBook(isbn);
+
+        List<String> borrowedBooks = member.getBorrowedBooks();
+        assertEquals(0, borrowedBooks.size());
+    }
 }
