@@ -47,6 +47,9 @@ public class FineCalculatorTest {
         LocalDate dueDate = LocalDate.of(2024, 1, 15);
         LocalDate returnDate = LocalDate.of(2024, 1, 20); // 5 days late
 
+        System.out.println("return date: " + returnDate);
+        System.out.println("due date: " + dueDate);
+
         double fine = calculator.calculateFine(dueDate, returnDate);
         // logic of 0.5 fine per day
         assertEquals(2.5, fine);
