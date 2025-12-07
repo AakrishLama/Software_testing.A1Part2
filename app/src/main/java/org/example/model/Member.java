@@ -36,4 +36,8 @@ public class Member {
         borrowedBooks.add(isbn);
     }
 
+    public void removeBorrowedBook(String isbn) {
+        borrowedBooks.remove(isbn);
+    }
+
 }
