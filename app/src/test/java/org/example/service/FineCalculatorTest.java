@@ -6,7 +6,12 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class FineCalculatorTest {
     private FineCalculator fineCalculator;
 
@@ -82,6 +87,21 @@ public class FineCalculatorTest {
 
         double fine = fineCalculator.calculateCurrentFine(dueDate);
         assertTrue(fine >= 1.5);
+    }
+
+    @Test
+    public void testCalculateCurrentFineWithMockedDate() {
+        LocalDate fixedDate = LocalDate.of(2024, 1, 20);
+        LocalDate dueDate = LocalDate.of(2024, 1, 15); // 5 days ago
+
+        // Mock LocalDate.now() to return a fixed date
+        try (MockedStatic<LocalDate> mockedLocalDate = Mockito.mockStatic(LocalDate.class)) {
+            mockedLocalDate.when(LocalDate::now).thenReturn(fixedDate);
+
+            double fine = fineCalculator.calculateCurrentFine(dueDate);
+
+            assertEquals(2.50, fine); // 5 * 0.50 = 2.50
+        }
     }
 
 }
