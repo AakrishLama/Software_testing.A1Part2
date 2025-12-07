@@ -28,4 +28,16 @@ public class FineCalculatorTest {
         assertEquals(0.0, fine);
     }
 
+    @Test
+    public void testCalculateFineForEarlyReturn() {
+
+        FineCalculator calculator = new FineCalculator();
+        LocalDate dueDate = LocalDate.of(2024, 1, 15);
+        LocalDate returnDate = LocalDate.of(2024, 1, 10); // 5 days early
+
+        double fine = calculator.calculateFine(dueDate, returnDate);
+
+        assertEquals(0.0, fine);
+    }
+
 }
