@@ -40,4 +40,16 @@ public class FineCalculatorTest {
         assertEquals(0.0, fine);
     }
 
+    @Test
+    public void testCalculateFineForOverdueReturn() {
+
+        FineCalculator calculator = new FineCalculator();
+        LocalDate dueDate = LocalDate.of(2024, 1, 15);
+        LocalDate returnDate = LocalDate.of(2024, 1, 20); // 5 days late
+
+        double fine = calculator.calculateFine(dueDate, returnDate);
+        // logic of 0.5 fine per day
+        assertEquals(2.5, fine);
+    }
+
 }
