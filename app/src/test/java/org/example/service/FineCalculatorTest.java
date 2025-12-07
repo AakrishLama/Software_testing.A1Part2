@@ -77,4 +77,13 @@ public class FineCalculatorTest {
         });
     }
 
+    @Test
+    public void testCalculateCurrentFine() {
+        FineCalculator calculator = new FineCalculator();
+        LocalDate dueDate = LocalDate.now().minusDays(3);
+
+        double fine = calculator.calculateCurrentFine(dueDate);
+        assertTrue(fine >= 1.5);
+    }
+
 }
