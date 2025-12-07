@@ -78,4 +78,18 @@ public class MemberTest {
         // check if the total fines is 15.0
         assertEquals(15.0, member.getTotalFines());
     }
+
+    @Test
+    public void testPayFine() {
+        member.addFines(5.0);
+        member.payFine(2.0);
+        assertEquals(3.0, member.getTotalFines());
+    }
+
+    @Test
+    public void testPayFineCannotBeNegative() {
+        member.addFines(5.0);
+        member.payFine(10.0);
+        assertEquals(0.0, member.getTotalFines());
+    }
 }
