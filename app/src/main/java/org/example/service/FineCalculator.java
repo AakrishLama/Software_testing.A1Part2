@@ -15,4 +15,8 @@ public class FineCalculator {
         long daysOverdue = returnDate.toEpochDay() - dueDate.toEpochDay();
         return daysOverdue * FINE_PER_DAY;
     }
+
+    public double calculateCurrentFine(LocalDate dueDate) {
+        return calculateFine(dueDate, LocalDate.now());
+    }
 }
