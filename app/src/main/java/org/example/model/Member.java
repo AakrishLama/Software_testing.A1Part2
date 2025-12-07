@@ -54,4 +54,11 @@ public class Member {
         return totalFines;
     }
 
+    public void payFines(double amount) {
+        this.totalFines -= amount;
+        if (this.totalFines < 0) {
+            this.totalFines = 0;
+        }
+    }
+
 }

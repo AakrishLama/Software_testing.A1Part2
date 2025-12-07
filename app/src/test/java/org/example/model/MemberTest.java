@@ -82,14 +82,14 @@ public class MemberTest {
     @Test
     public void testPayFine() {
         member.addFines(5.0);
-        member.payFine(2.0);
+        member.payFines(2.0);
         assertEquals(3.0, member.getTotalFines());
     }
 
     @Test
     public void testPayFineCannotBeNegative() {
         member.addFines(5.0);
-        member.payFine(10.0);
+        member.payFines(10.0);
         assertEquals(0.0, member.getTotalFines());
     }
 }
