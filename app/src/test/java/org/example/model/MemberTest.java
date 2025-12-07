@@ -1,29 +1,31 @@
 package org.example.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 public class MemberTest {
 
+    private Member member;
+    private static final String MEMBERID = "M001";
+    private static final String NAME = "John Doe";
+    private static final String EMAIL = "john@example.com";
+
+    @BeforeEach
+    public void setUp() {
+        member = new Member(MEMBERID, NAME, EMAIL);
+    }
+
     @Test
     public void testMemberCreation() {
-        // hard coded
-        String memberId = "M001";
-        String name = "John Doe";
-        String email = "john@example.com";
-
-        Member member = new Member(memberId, name, email);
-
-        assertEquals(memberId, member.getMemberId());
-        assertEquals(name, member.getName());
-        assertEquals(email, member.getEmail());
+        assertEquals(MEMBERID, member.getMemberId());
+        assertEquals(NAME, member.getName());
+        assertEquals(EMAIL, member.getEmail());
     }
 
     @Test
     public void testInitialBorrowedBookIsEmpty() {
-        Member member = new Member("M001", "John Doe", "john@example.com");
-
         // check if the member has no borrowed books
         assertNotNull(member.getBorrowedBooks());
 
@@ -32,8 +34,6 @@ public class MemberTest {
 
     @Test
     public void testAddBorrowedBook() {
-        Member member = new Member("M001", "John Doe", "john@example.com");
-
         String isbn = "1234";
         member.addBorrowedBook(isbn);
 
@@ -44,8 +44,6 @@ public class MemberTest {
 
     @Test
     public void testRemoveBorrowedBook() {
-        Member member = new Member("M001", "John Doe", "john@example.com");
-
         String isbn = "1234";
         member.addBorrowedBook(isbn);
 
