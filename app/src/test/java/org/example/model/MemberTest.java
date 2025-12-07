@@ -1,12 +1,13 @@
-package model;
+package org.example.model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
-public class MemberTest{
+public class MemberTest {
 
     @Test
-    public void testMemberCreation(){
+    public void testMemberCreation() {
         // hard coded
         String memberId = "M001";
         String name = "John Doe";
@@ -20,7 +21,7 @@ public class MemberTest{
     }
 
     @Test
-    public void testInitialBorrowedBookIsEmpty(){
+    public void testInitialBorrowedBookIsEmpty() {
         Member member = new Member("M001", "John Doe", "john@example.com");
 
         // check if the member has no borrowed books
@@ -30,7 +31,7 @@ public class MemberTest{
     }
 
     @Test
-    public void testAddBorrowedBook(){
+    public void testAddBorrowedBook() {
         Member member = new Member("M001", "John Doe", "john@example.com");
 
         String isbn = "1234";
@@ -40,4 +41,4 @@ public class MemberTest{
         assertEquals(1, borrowedBooks.size());
         assertEquals(isbn, borrowedBooks.get(0));
     }
-}  
+}

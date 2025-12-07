@@ -1,35 +1,39 @@
-package model;
+package org.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Member{
+public class Member {
     private final String memberId;
     private final String name;
     private final String email;
     private final List<String> borrowedBooks;
-    
-    public Member(String memberId, String name, String email){
+
+    public Member(String memberId, String name, String email) {
         this.memberId = memberId;
         this.name = name;
         this.email = email;
         this.borrowedBooks = new ArrayList<>();
     }
-    
-    public String getMemberId(){
+
+    public String getMemberId() {
         return memberId;
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
 
-    public List<String> getBorrowedBooks(){
+    public List<String> getBorrowedBooks() {
         return new ArrayList<>(borrowedBooks);
     }
-    
+
+    public void addBorrowedBook(String isbn) {
+        borrowedBooks.add(isbn);
+    }
+
 }
