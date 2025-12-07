@@ -95,6 +95,35 @@ public class MemberTest {
 
     @Test
     public void testCanBorrowUnderLimitAndNoFines() {
-        assertTrue(member.canBorrowBook());
+        assertTrue(member.canBorrow());
+    }
+
+    @Test
+    public void testCannotBorrowWhenTooManyBooks() {
+        // Add 5 books
+        for (int i = 1; i <= 5; i++) {
+            member.addBorrowedBook("ISBN" + i);
+        }
+
+        assertFalse(member.canBorrow());
+    }
+
+    @Test
+    public void testCannotBorrowWhenHighFines() {
+        // add fine of 15
+        member.addFines(15.0);
+
+        assertFalse(member.canBorrow());
+    }
+
+    @Test
+    public void testCanBorrowWhen4BooksAndLowFines() {
+        // Add 4 books
+        for (int i = 1; i <= 4; i++) {
+            member.addBorrowedBook("ISBN" + i);
+        }
+        member.addFines(5.0);
+
+        assertFalse(member.canBorrow());
     }
 }
