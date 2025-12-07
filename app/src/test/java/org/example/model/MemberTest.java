@@ -52,4 +52,30 @@ public class MemberTest {
         List<String> borrowedBooks = member.getBorrowedBooks();
         assertEquals(0, borrowedBooks.size());
     }
+
+    @Test
+    public void testInitialTotalFinesIsZero() {
+        assertEquals(0.0, member.getTotalFines());
+    }
+
+    @Test
+    public void testAddFines() {
+        member.addFines(5.0);
+        assertEquals(5.0, member.getTotalFines());
+    }
+
+    @Test
+    public void testRemoveFines() {
+        member.addFines(5.0);
+        member.removeFines(2.0);
+        assertEquals(3.0, member.getTotalFines());
+    }
+
+    @Test
+    public void testMultipleFines() {
+        member.addFines(5.0);
+        member.addFines(10.0);
+        // check if the total fines is 15.0
+        assertEquals(15.0, member.getTotalFines());
+    }
 }
