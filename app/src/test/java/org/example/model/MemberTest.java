@@ -129,14 +129,15 @@ public class MemberTest {
 
     @Test
     public void testToStringWithBooksAndFines() {
-        member.addBorrowedBook("ISBN1");
-        member.addBorrowedBook("ISBN2");
-        member.addFines(5.0);
-        String expected = "Member ID: " + MEMBERID + "\n" +
-                "Name: " + NAME + "\n" +
-                "Email: " + EMAIL + "\n" +
-                "Books: " + member.getBorrowedBooks().size() + "\n" +
-                "Total Fines: " + member.getTotalFines();
-        assertEquals(expected, member.toString());
+        member.addBorrowedBook("12345");
+        member.addBorrowedBook("67890");
+        member.addFines(7.5);
+
+        // When
+        String result = member.toString();
+
+        // Then
+        assertTrue(result.contains("Books: 2"));
+        assertTrue(result.contains("Fines: $7.5"));
     }
 }

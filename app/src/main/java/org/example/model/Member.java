@@ -67,11 +67,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member ID: " + memberId + "\n" +
-                "Name: " + name + "\n" +
-                "Email: " + email + "\n" +
-                "Books: " + borrowedBooks.size() + "\n" +
-                "Total Fines: " + totalFines;
+        return String.format(java.util.Locale.US, "%s - %s (%s) - Books: %d, Fines: $%.2f",
+                memberId, name, email, borrowedBooks.size(), totalFines);
     }
-
 }
