@@ -18,4 +18,5 @@ public class BookTest {
     public void setUp() {
         book = new Book(ISBN, TITLE, AUTHOR);
     }
+
 }
