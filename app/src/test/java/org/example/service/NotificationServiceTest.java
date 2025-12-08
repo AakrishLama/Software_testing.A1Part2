@@ -18,4 +18,12 @@ public class NotificationServiceTest {
         String bookTitle = "book";
         service.sendBorrowConfirmation(member, bookTitle);
     }
+
+    @Test
+    public void testSendReturnConfirmation() {
+        NotificationService service = new NotificationService();
+        Member member = new Member("John", "john@example.com", "1234567890");
+        String bookTitle = "koob";
+        service.sendReturnConfirmation(member, bookTitle);
+    }
 }
