@@ -69,6 +69,7 @@ public class MemberRepositoryTest {
         assertEquals(2, allMembers.size());
     }
 
+
     @Test
     public void testDeleteRemovesMember() {
         // Given
@@ -79,5 +80,43 @@ public class MemberRepositoryTest {
 
         // Then
         assertNull(repository.findById("M001").orElse(null));
+    }
+    
+    //! cases.
+    @Test
+    public void testSaveOverwritesExistingMember() {
+        // Given
+        repository.save(member1);
+        Member updatedMember = new Member("M001", "John Updated", "john.updated@test.com");
+
+        // When
+        repository.save(updatedMember);
+        Member found = repository.findById("M001").orElse(null);
+
+        // Then
+        assertEquals("John Updated", found.getName());
+        assertEquals("john.updated@test.com", found.getEmail());
+    }
+
+    @Test
+    public void testDeleteNonExistentMemberDoesNothing() {
+        // When - should not throw exception
+        repository.delete("NONEXISTENT");
+
+        // Then - repository should still be empty
+        assertTrue(repository.findAll().isEmpty());
+    }
+
+    @Test
+    public void testFindAllReturnsCopyNotReference() {
+        // Given
+        repository.save(member1);
+
+        // When
+        List<Member> allMembers = repository.findAll();
+        allMembers.clear(); // Try to modify the returned list
+
+        // Then - original repository should still have the member
+        assertEquals(1, repository.findAll().size());
     }
 }
