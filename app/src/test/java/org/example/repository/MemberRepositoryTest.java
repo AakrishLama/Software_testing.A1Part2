@@ -84,6 +84,6 @@ public class MemberRepositoryTest {
 
         repository.delete("M001");
         
-        assertNull(repository.findById("M001"));
+        assertNull(repository.findById("M001").orElse(null));
     }
 }
