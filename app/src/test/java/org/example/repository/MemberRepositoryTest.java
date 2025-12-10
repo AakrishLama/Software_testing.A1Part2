@@ -55,6 +55,10 @@ public class MemberRepositoryTest {
     public void testFindAllEmptyRepository() {
         // Given
         MemberRepository repository = new MemberRepository();
+        // When
+        List<Member> allMembers = repository.findAll();
+        // Then
+        assertTrue(allMembers.isEmpty());
     }
     @Test
     public void testFindAllWithMembers() {
@@ -69,5 +73,17 @@ public class MemberRepositoryTest {
         List<Member> allMembers = repository.findAll();
         
         assertEquals(2, allMembers.size());
+    }
+    @Test
+    public void testDeleteMember() {
+        // Given
+        MemberRepository repository = new MemberRepository();
+        Member member = new Member("M001", "John", "john@test.com");
+        repository.save(member);
+        
+
+        repository.delete("M001");
+        
+        assertNull(repository.findById("M001"));
     }
 }

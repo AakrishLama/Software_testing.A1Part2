@@ -22,4 +22,6 @@ public class MemberRepository {
     public List<Member> findAll() {
         return new ArrayList<>(members.values());
     }
+    public void delete(String memberId) {
+    }
 }
