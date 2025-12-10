@@ -20,6 +20,6 @@ public class MemberRepository {
     }
 
     public List<Member> findAll() {
-        return new ArrayList<>();
+        return new ArrayList<>(members.values());
     }
 }

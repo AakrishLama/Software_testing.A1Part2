@@ -68,7 +68,6 @@ public class MemberRepositoryTest {
         // When
         List<Member> allMembers = repository.findAll();
         
-        // Then - This will FAIL because findAll returns empty list
         assertEquals(2, allMembers.size());
     }
 }
