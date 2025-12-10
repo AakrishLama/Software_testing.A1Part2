@@ -29,7 +29,7 @@ public class MemberRepositoryTest {
         
         // When
         repository.save(member);
-        Member found = repository.findById("M001");
+        Member found = repository.findById("M001").orElse(null);
         
         // Then - This will FAIL because findById returns null
         assertNotNull(found);
