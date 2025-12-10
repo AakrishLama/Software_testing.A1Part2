@@ -2,6 +2,8 @@ package org.example.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.example.model.Member;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -49,5 +51,24 @@ public class MemberRepositoryTest {
         // Then - This will PASS because findById returns null for non-existent member
         assertNull(found);
     }
-
+    @Test
+    public void testFindAllEmptyRepository() {
+        // Given
+        MemberRepository repository = new MemberRepository();
+    }
+    @Test
+    public void testFindAllWithMembers() {
+        // Given
+        MemberRepository repository = new MemberRepository();
+        Member member1 = new Member("M001", "John", "john@test.com");
+        Member member2 = new Member("M002", "Jane", "jane@test.com");
+        repository.save(member1);
+        repository.save(member2);
+        
+        // When
+        List<Member> allMembers = repository.findAll();
+        
+        // Then - This will FAIL because findAll returns empty list
+        assertEquals(2, allMembers.size());
+    }
 }
