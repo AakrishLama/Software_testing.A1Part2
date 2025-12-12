@@ -27,17 +27,11 @@ public class NotificationServiceTest {
 
     @Test
     void testBorrowConfirmation() {
-        // all confirmation will get printed to we have to get createive with tests,
-        // reading the stdout
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
         // use params of notification service
-        ns.sendBorrowConfirmation(member, book.getTitle());
+        String message = ns.createBorrowMessage(member, book.getTitle());
 
-        String output = outputStream.toString();
-        assertEquals("Successfully borrowed book.", ns.sendBorrowConfirmation(member, book.getTitle()));
-
-        System.setOut(System.out); // restore normal output
+        assertTrue(message.contains("Dear Jane Doe"));
+        assertTrue(message.contains("To Kill a Mockingbird"));
+        assertTrue(message.contains("return it on time"));
     }
 }

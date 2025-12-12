@@ -3,8 +3,9 @@ package org.example.service;
 import org.example.model.Member;
 
 public class NotificationService {
-    public String sendBorrowConfirmation(Member member, String bookTitle) {
-        String message = "Successfully borrowed book.";
-        return message;
+    public String createBorrowMessage(Member member, String bookTitle) {
+        return String.format(
+                "Dear %s, you have successfully borrowed '%s'. Please return it on time to avoid fines.",
+                member.getName(), bookTitle);
     }
 }
