@@ -8,4 +8,10 @@ public class NotificationService {
                 "Dear %s, you have successfully borrowed '%s'. Please return it on time to avoid fines.",
                 member.getName(), bookTitle);
     }
+
+    public String createReturnMessage(Member member, String bookTitle) {
+        return String.format(
+                "Dear %s, you have successfully returned '%s'. Thank you!.",
+                member.getName(), bookTitle);
+    }
 }
