@@ -106,4 +106,30 @@ public class BookTest {
         assertNull(book.getBorrowedBy());
         assertNull(book.getDueDate());
     }
+
+    @Test
+    void testLongDueDate() {
+        assertNull(book.getDueDate());
+
+        // should always work even in 9025
+        LocalDate dueDate = LocalDate.of(9025, 12, 18);
+        book.setDueDate(dueDate);
+
+        assertEquals(dueDate, book.getDueDate());
+    }
+
+    // not neccessary, just for learning
+    @Test
+    void testCannotSetPastDueDate() {
+        assertNull(book.getDueDate());
+
+        // should not work bc. wrong date
+        LocalDate pastDate = LocalDate.of(2020, 10, 18);
+
+        // we need to do some trickery because LocalDate already checks this
+        assertThrows(IllegalArgumentException.class, () -> {
+            book.setDueDate(pastDate);
+        });
+    }
+
 }
