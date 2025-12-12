@@ -39,4 +39,13 @@ public class NotificationServiceTest {
         assertTrue(message.contains("To Kill a Mockingbird"));
         assertTrue(message.contains("successfully returned"));
     }
+
+    @Test
+    void testOverdueNotification() {
+        String message = ns.createReturnMessage(member, book.getTitle());
+
+        assertTrue(message.contains("Dear Jane Doe"));
+        assertTrue(message.contains("To Kill a Mockingbird"));
+        assertTrue(message.contains("is overdue by"));
+    }
 }
