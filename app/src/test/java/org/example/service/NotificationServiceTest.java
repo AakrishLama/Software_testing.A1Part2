@@ -44,8 +44,11 @@ public class NotificationServiceTest {
 
     @Test
     void testOverdueNotification() {
-        String message = ns.createOverdueMessage(member, book.getTitle());
+        Book overdueBook = new Book("978-3-16-138410-0", "To Kill a Mockingbird", "Harper Lee");
+        LocalDate dueDate = LocalDate.of(2025, 11, 18); // Past date
+        overdueBook.setDueDate(dueDate);
 
+        String message = ns.createOverdueMessage(member, overdueBook.getDueDate(), overdueBook.getTitle());
         assertTrue(message.contains("Dear Jane Doe"));
         assertTrue(message.contains("To Kill a Mockingbird"));
         assertTrue(message.contains("is overdue by"));
@@ -59,9 +62,9 @@ public class NotificationServiceTest {
         bookTest.setDueDate(dueDate);
 
         // create the amount based on the book
-        double fineAmount = fc.calculateCurrentFine(book.getDueDate());
+        double fineAmount = fc.calculateCurrentFine(bookTest.getDueDate());
 
-        String message = ns.createFineMessage(member, book.getTitle(), fineAmount);
+        String message = ns.createFineMessage(member, fineAmount);
 
         assertTrue(message.contains("Dear Jane Doe"));
         assertTrue(message.contains("you have been charged a fine"));
