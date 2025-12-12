@@ -73,7 +73,7 @@ public class BookTest {
         assertNull(book.getDueDate());
 
         // we need to make a date object
-        LocalDate dueDate = LocalDate.of(2025, 12, 18);
+        LocalDate dueDate = LocalDate.of(2026, 12, 18);
         book.setDueDate(dueDate);
 
         assertEquals(dueDate, book.getDueDate());
@@ -81,7 +81,7 @@ public class BookTest {
 
     @Test
     void testBorrowLogic() {
-        LocalDate dueDateTest = LocalDate.of(2025, 12, 24);
+        LocalDate dueDateTest = LocalDate.of(2026, 12, 24);
 
         // use setters to simulate borrow book
         book.setAvailable(false);
@@ -112,7 +112,7 @@ public class BookTest {
         assertNull(book.getDueDate());
 
         // should always work even in 9025
-        LocalDate dueDate = LocalDate.of(9025, 12, 18);
+        LocalDate dueDate = LocalDate.of(3026, 12, 18);
         book.setDueDate(dueDate);
 
         assertEquals(dueDate, book.getDueDate());

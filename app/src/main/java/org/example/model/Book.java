@@ -52,6 +52,10 @@ public class Book {
     }
 
     public void setDueDate(LocalDate dueDate) {
+        // use isBefore mthod of LocalDate to see if dueDate is set in past
+        if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Due date cannot be in the past");
+        }
         this.dueDate = dueDate;
     }
 
