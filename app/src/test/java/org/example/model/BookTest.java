@@ -3,8 +3,6 @@ package org.example.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import net.bytebuddy.asm.Advice.Local;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
