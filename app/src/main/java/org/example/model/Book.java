@@ -29,4 +29,8 @@ public class Book {
         return author;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
 }
