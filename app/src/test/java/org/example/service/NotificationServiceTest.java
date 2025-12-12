@@ -45,7 +45,7 @@ public class NotificationServiceTest {
     @Test
     void testOverdueNotification() {
         Book overdueBook = new Book("978-3-16-138410-0", "To Kill a Mockingbird", "Harper Lee");
-        LocalDate dueDate = LocalDate.of(2025, 11, 18); // Past date
+        LocalDate dueDate = LocalDate.of(2026, 11, 18); // Past date
         overdueBook.setDueDate(dueDate);
 
         String message = ns.createOverdueMessage(member, overdueBook.getDueDate(), overdueBook.getTitle());
