@@ -1,10 +1,6 @@
 package org.example.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.example.model.Book;
 import org.example.model.Member;
@@ -33,5 +29,14 @@ public class NotificationServiceTest {
         assertTrue(message.contains("Dear Jane Doe"));
         assertTrue(message.contains("To Kill a Mockingbird"));
         assertTrue(message.contains("return it on time"));
+    }
+
+    @Test
+    void testReturnConfirmation() {
+        String message = ns.createReturnMessage(member, book.getTitle());
+
+        assertTrue(message.contains("Dear Jane Doe"));
+        assertTrue(message.contains("To Kill a Mockingbird"));
+        assertTrue(message.contains("successfully returned"));
     }
 }
