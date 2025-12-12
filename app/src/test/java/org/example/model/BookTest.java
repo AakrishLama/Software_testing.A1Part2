@@ -3,7 +3,6 @@ package org.example.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.time.LocalDate;
 
 public class BookTest {
     private Book book;
@@ -11,15 +10,12 @@ public class BookTest {
     private static final String ISBN = "978-3-16-138410-0";
     private static final String TITLE = "Blood Meridian";
     private static final String AUTHOR = "Cormac McCarthy";
-    private static final boolean AVAILABLE = true;
-    private static final String BORROWEDBY = "John Doe";
 
     @BeforeEach
     public void setUp() {
         book = new Book(ISBN, TITLE, AUTHOR);
     }
 
-    // This might be not so useful because its just a getter
     @Test
     void shouldHaveValidIsbn() {
         assertEquals(ISBN, book.getIsbn());
@@ -32,6 +28,16 @@ public class BookTest {
 
     @Test
     void shouldBeAvailable() {
-        assertEquals(AVAILABLE, book.isAvailable());
+        assertTrue(book.isAvailable());
+    }
+
+    @Test
+    void shouldHaveNullBorrowedBy() {
+        assertNull(book.getBorrowedBy());
+    }
+
+    @Test
+    void shouldHaveNullDueDate() {
+        assertNull(book.getDueDate());
     }
 }

@@ -17,6 +17,7 @@ public class Book {
         this.available = true;
     }
 
+    // getters
     public String getIsbn() {
         return isbn;
     }
@@ -31,6 +32,27 @@ public class Book {
 
     public boolean isAvailable() {
         return available;
+    }
+
+    public String getBorrowedBy() {
+        return borrowedBy;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    // setters
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setBorrowedBy(String borrowedBy) {
+        this.borrowedBy = borrowedBy;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
 
 }
