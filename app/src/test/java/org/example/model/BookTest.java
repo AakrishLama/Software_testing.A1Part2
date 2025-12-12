@@ -19,4 +19,19 @@ public class BookTest {
         book = new Book(ISBN, TITLE, AUTHOR);
     }
 
+    // This might be not so useful because its just a getter
+    @Test
+    void shouldHaveValidIsbn() {
+        assertEquals(ISBN, book.getIsbn());
+    }
+
+    @Test
+    void shouldHaveValidTitle() {
+        assertEquals(TITLE, book.getTitle());
+    }
+
+    @Test
+    void shouldBeAvailable() {
+        assertEquals(AVAILABLE, book.isAvailable());
+    }
 }
