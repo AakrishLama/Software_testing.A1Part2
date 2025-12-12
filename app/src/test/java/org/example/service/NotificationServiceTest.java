@@ -24,7 +24,7 @@ public class NotificationServiceTest {
     @Test
     void testBorrowConfirmation() {
         assertEquals(
-                "Dear Jane Doe, you have successfully borrows 'To Kill a Mockingbird'. Please return it on time to avoid fines.",
-                ns.sendBorrowConfirmation());
+                "Successfully borrowed book.",
+                ns.sendBorrowConfirmation(member, book.getTitle()));
     }
 }
