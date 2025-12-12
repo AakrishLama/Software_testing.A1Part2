@@ -93,4 +93,17 @@ public class BookTest {
         assertEquals("Jane Doe", book.getBorrowedBy());
         assertEquals(dueDateTest, book.getDueDate());
     }
+
+    @Test
+    void testReturnLogic() {
+        // use setters to simulate return book
+        book.setAvailable(true);
+        book.setBorrowedBy(null);
+        book.setDueDate(null);
+
+        // use assertions to match expected values
+        assertTrue(book.isAvailable());
+        assertNull(book.getBorrowedBy());
+        assertNull(book.getDueDate());
+    }
 }
