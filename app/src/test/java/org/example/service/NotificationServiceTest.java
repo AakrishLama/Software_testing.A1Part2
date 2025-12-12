@@ -2,6 +2,8 @@ package org.example.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 import org.example.model.Book;
 import org.example.model.Member;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,10 +44,26 @@ public class NotificationServiceTest {
 
     @Test
     void testOverdueNotification() {
-        String message = ns.createReturnMessage(member, book.getTitle());
+        String message = ns.createOverdueMessage(member, book.getTitle());
 
         assertTrue(message.contains("Dear Jane Doe"));
         assertTrue(message.contains("To Kill a Mockingbird"));
         assertTrue(message.contains("is overdue by"));
+    }
+
+    @Test
+    void testFineNotification() {
+        // create mock object
+        Book bookTest = new Book("978-3-16-138410-0", "To Kill a Mockingbird", "Harper Lee");
+        LocalDate dueDate = LocalDate.of(2026, 12, 18);
+        bookTest.setDueDate(dueDate);
+
+        // create the amount based on the book
+        double fineAmount = fc.calculateCurrentFine(book.getDueDate());
+
+        String message = ns.createFineMessage(member, book.getTitle(), fineAmount);
+
+        assertTrue(message.contains("Dear Jane Doe"));
+        assertTrue(message.contains("you have been charged a fine"));
     }
 }
