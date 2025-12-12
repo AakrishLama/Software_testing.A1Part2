@@ -40,4 +40,15 @@ public class BookTest {
     void shouldHaveNullDueDate() {
         assertNull(book.getDueDate());
     }
+
+    @Test
+    void testSetAvailibility() {
+        assertTrue(book.isAvailable());
+
+        book.setAvailable(false);
+        assertFalse(book.isAvailable());
+
+        book.setAvailable(true);
+        assertTrue(book.isAvailable());
+    }
 }
