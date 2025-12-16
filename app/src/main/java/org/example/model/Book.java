@@ -1,0 +1,62 @@
+package org.example.model;
+
+import java.time.LocalDate;
+
+public class Book {
+    private final String isbn;
+    private final String title;
+    private final String author;
+    private boolean available;
+    private String borrowedBy;
+    private LocalDate dueDate;
+
+    public Book(String isbn, String title, String author) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.available = true;
+    }
+
+    // getters
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public String getBorrowedBy() {
+        return borrowedBy;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    // setters
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public void setBorrowedBy(String borrowedBy) {
+        this.borrowedBy = borrowedBy;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        // use isBefore mthod of LocalDate to see if dueDate is set in past
+        if (dueDate != null && dueDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Due date cannot be in the past");
+        }
+        this.dueDate = dueDate;
+    }
+
+}
