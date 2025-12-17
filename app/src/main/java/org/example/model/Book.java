@@ -55,4 +55,9 @@ public class Book {
     this.dueDate = dueDate;
   }
 
+  @Override
+  public String toString() {
+    return String.format("%s - %s by %s", isbn, title, author);
+  }
+
 }

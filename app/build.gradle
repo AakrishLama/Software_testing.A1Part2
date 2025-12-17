@@ -54,3 +54,7 @@ jacocoTestCoverageVerification {
         }
     }
 }
+
+run {
+    standardInput = System.in
+}
