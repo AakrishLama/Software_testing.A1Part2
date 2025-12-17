@@ -31,6 +31,7 @@ public class NotificationServiceTest {
     assertTrue(message.contains("Dear Jane Doe"));
     assertTrue(message.contains("To Kill a Mockingbird"));
     assertTrue(message.contains("return it on time"));
+    ns.sendBorrowConfirmation(member, book.getTitle());
   }
 
   @Test
@@ -40,6 +41,7 @@ public class NotificationServiceTest {
     assertTrue(message.contains("Dear Jane Doe"));
     assertTrue(message.contains("To Kill a Mockingbird"));
     assertTrue(message.contains("successfully returned"));
+    ns.sendReturnConfirmation(member, book.getTitle());
   }
 
   @Test
@@ -68,5 +70,6 @@ public class NotificationServiceTest {
 
     assertTrue(message.contains("Dear Jane Doe"));
     assertTrue(message.contains("you have been charged a fine"));
+    ns.sendFineNotification(member, fineAmount);
   }
 }
