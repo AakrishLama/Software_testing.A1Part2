@@ -1,7 +1,6 @@
 package org.example.repository;
 
 import org.example.model.Member;
-import org.example.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;
@@ -69,7 +68,6 @@ public class MemberRepositoryTest {
         assertEquals(2, allMembers.size());
     }
 
-
     @Test
     public void testDeleteRemovesMember() {
         // Given
@@ -81,8 +79,8 @@ public class MemberRepositoryTest {
         // Then
         assertNull(repository.findById("M001").orElse(null));
     }
-    
-    //! cases.
+
+    // ! cases.
     @Test
     public void testSaveOverwritesExistingMember() {
         // Given
