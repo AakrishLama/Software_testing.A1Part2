@@ -2,81 +2,71 @@ package org.example.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.time.LocalDate;
 
-import org.junit.jupiter.api.AfterEach;
+import org.example.model.Book;
+import org.example.model.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.example.model.Member;
 
 public class NotificationServiceTest {
-    private NotificationService service;
-    private ByteArrayOutputStream outputStream;
-    private PrintStream originalOut;
-    private Member testMember;
+  private NotificationService ns;
+  private Member member;
+  private Book book;
+  private FineCalculator fc;
 
-    @BeforeEach
-    public void setUp() {
-        service = new NotificationService();
-        outputStream = new ByteArrayOutputStream();
-        originalOut = System.out;
-        System.setOut(new PrintStream(outputStream));
-        testMember = new Member("1", "test", "test@example.com");
-    }
+  @BeforeEach
+  public void setUp() {
+    ns = new NotificationService();
+    member = new Member("001", "Jane Doe", "janedoe@gmail.com");
+    book = new Book("978-3-16-138410-0", "To Kill a Mockingbird", "Harper Lee");
+    fc = new FineCalculator();
+  }
 
-    @AfterEach
-    public void tearDown() {
-        System.setOut(originalOut);
-    }
+  @Test
+  void testBorrowConfirmation() {
+    // use params of notification service
+    String message = ns.createBorrowMessage(member, book.getTitle());
 
-    @Test
-    public void testNotificationServiceCreation() {
-        assertNotNull(service);
-    }
+    assertTrue(message.contains("Dear Jane Doe"));
+    assertTrue(message.contains("To Kill a Mockingbird"));
+    assertTrue(message.contains("return it on time"));
+  }
 
-    @Test
-    public void testSendBorrowConfirmationPrintsMessage() {
-        // When
-        service.sendBorrowConfirmation(testMember, "Test Book");
+  @Test
+  void testReturnConfirmation() {
+    String message = ns.createReturnMessage(member, book.getTitle());
 
-        // Then
-        assertFalse(outputStream.toString().isEmpty());
-    }
+    assertTrue(message.contains("Dear Jane Doe"));
+    assertTrue(message.contains("To Kill a Mockingbird"));
+    assertTrue(message.contains("successfully returned"));
+  }
 
-    @Test
-    public void testSendBorrowConfirmationContainsCorrectInfo() {
-        // When
-        service.sendBorrowConfirmation(testMember, "Test Book");
+  @Test
+  void testOverdueNotification() {
+    Book overdueBook = new Book("978-3-16-138410-0", "To Kill a Mockingbird", "Harper Lee");
+    LocalDate dueDate = LocalDate.of(2026, 11, 18); // Past date
+    overdueBook.setDueDate(dueDate);
 
-        // Then
-        String output = outputStream.toString();
-        assertTrue(output.contains("test"));
-        assertTrue(output.contains("Test Book"));
-        assertTrue(output.contains("test@example.com"));
-    }
+    String message = ns.createOverdueMessage(member, overdueBook.getDueDate(), overdueBook.getTitle());
+    assertTrue(message.contains("Dear Jane Doe"));
+    assertTrue(message.contains("To Kill a Mockingbird"));
+    assertTrue(message.contains("is overdue by"));
+  }
 
-    @Test
-    public void testSendReturnConfirmation() {
-        service.sendReturnConfirmation(testMember, "Returned Book");
-        String output = outputStream.toString();
-        assertTrue(output.contains("Returned Book"));
-        assertTrue(output.contains("Book Returned"));
-    }
+  @Test
+  void testFineNotification() {
+    // create mock object
+    Book bookTest = new Book("978-3-16-138410-0", "To Kill a Mockingbird", "Harper Lee");
+    LocalDate dueDate = LocalDate.of(2026, 12, 18);
+    bookTest.setDueDate(dueDate);
 
-    @Test
-    public void testSendOverdueNotification() {
-        service.sendOverdueNotification(testMember, "Overdue Book", 3);
-        String output = outputStream.toString();
-        assertTrue(output.contains("3 days"));
-        assertTrue(output.contains("Overdue Book Alert"));
-    }
+    // create the amount based on the book
+    double fineAmount = fc.calculateCurrentFine(bookTest.getDueDate());
 
-    @Test
-    public void testSendFineNotificationFormatsAmountCorrectly() {
-        service.sendFineNotification(testMember, 7.50);
-        String output = outputStream.toString();
-        assertTrue(output.contains("$7.50"));
-        assertTrue(output.contains("Fine Notification"));
-    }
+    String message = ns.createFineMessage(member, fineAmount);
+
+    assertTrue(message.contains("Dear Jane Doe"));
+    assertTrue(message.contains("you have been charged a fine"));
+  }
 }

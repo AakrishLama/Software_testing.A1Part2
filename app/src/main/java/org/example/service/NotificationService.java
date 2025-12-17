@@ -1,43 +1,44 @@
 package org.example.service;
 
+import java.time.LocalDate;
+
 import org.example.model.Member;
 
 public class NotificationService {
+  public String createBorrowMessage(Member member, String bookTitle) {
+    return String.format(
+        "Dear %s, you have successfully borrowed '%s'. Please return it on time to avoid fines.",
+        member.getName(), bookTitle);
+  }
 
-    public void sendBorrowConfirmation(Member member, String bookTitle) {
-        String message = String.format(java.util.Locale.US,
-                "Dear %s, you have successfully borrowed '%s'. Please return it on time to avoid fines.",
-                member.getName(), bookTitle);
-        sendEmail(member.getEmail(), "Book Borrowed", message);
-    }
+  public String createReturnMessage(Member member, String bookTitle) {
+    return String.format(
+        "Dear %s, you have successfully returned '%s'. Thank you!.",
+        member.getName(), bookTitle);
+  }
 
-    public void sendReturnConfirmation(Member member, String bookTitle) {
-        String message = String.format(java.util.Locale.US,
-                "Dear %s, you have successfully returned '%s'. Thank you!",
-                member.getName(), bookTitle);
-        sendEmail(member.getEmail(), "Book Returned", message);
-    }
+  public String createOverdueMessage(Member member, LocalDate dueDate, String bookTitle) {
+    long daysOverdue = java.time.temporal.ChronoUnit.DAYS.between(dueDate, LocalDate.now());
+    return String.format(
+        "Dear %s, the book '%s' is overdue by %d days. Please return it immediately.",
+        member.getName(), bookTitle, daysOverdue);
+  }
 
-    public void sendOverdueNotification(Member member, String bookTitle, int daysOverdue) {
-        String message = String.format(java.util.Locale.US,
-                "Dear %s, the book '%s' is overdue by %d days. Please return it immediately.",
-                member.getName(), bookTitle, daysOverdue);
-        sendEmail(member.getEmail(), "Overdue Book Alert", message);
-    }
+  public String createFineMessage(Member member, double fineAmount) {
+    return String.format(
+        "Dear %s, you have been charged a fine of $%.2f. Please pay at your earliest convenience.",
+        member.getName(), fineAmount);
+  }
 
-    public void sendFineNotification(Member member, double fineAmount) {
-        String message = String.format(java.util.Locale.US,
-                "Dear %s, you have been charged a fine of $%.2f. Please pay at your earliest convenience.",
-                member.getName(), fineAmount);
-        sendEmail(member.getEmail(), "Fine Notification", message);
-    }
+  public void sendBorrowConfirmation(Member member, String bookTitle) {
+    System.out.println(createBorrowMessage(member, bookTitle));
+  }
 
-    private void sendEmail(String email, String subject, String message) {
-        // Simulated email sending
-        System.out.println("=== EMAIL SENT ===");
-        System.out.println("To: " + email);
-        System.out.println("Subject: " + subject);
-        System.out.println("Message: " + message);
-        System.out.println("==================");
-    }
+  public void sendReturnConfirmation(Member member, String bookTitle) {
+    System.out.println(createReturnMessage(member, bookTitle));
+  }
+
+  public void sendFineNotification(Member member, double fineAmount) {
+    System.out.println(createFineMessage(member, fineAmount));
+  }
 }
